@@ -1,0 +1,10 @@
+@media (width <= 700px){
+    .main-area{
+        grid-template-columns: auto;
+        grid-auto-flow: dense;
+    }
+    .result-container{
+        grid-row: 2;
+
+    }
+}

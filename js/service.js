@@ -2,16 +2,16 @@
 
 const YT_KEY = 'AIzaSyAOSYBPy0EXZJE1yz4n5zGRzaL-_OfGOKM'
 const YTDB_KEY = 'YouTubeDB'
+const WIKIDB_KEY = 'WIKIDB'
 
-function callYT(searchTerm){
-    const st = formatStr(searchTerm)
+function callYT(st){
     const pastSearches = loadFromStorage(YTDB_KEY) || {}
     if (pastSearches[st]) {
         console.log('cached')
         return Promise.resolve(pastSearches[st])
     }
 
-    const apiUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&videoEmbeddable=true&type=video&key=${YT_KEY}&q=${searchTerm}`
+    const apiUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&videoEmbeddable=true&type=video&key=${YT_KEY}&q=${st}`
     console.log('axios')
     return axios.get(apiUrl)
         .then((res) => {
@@ -38,39 +38,37 @@ function callYT(searchTerm){
 
     // WIKIPEDIA
 
-    function callWikipedia(searchTerm){
-        const st = formatStr(searchTerm)
+    function callWikipedia(st){
 
-        // const pastSearches = loadFromStorage(YTDB_KEY) || {}
-        // if (pastSearches[st]) {
-        //     console.log('cached')
-        //     return Promise.resolve(pastSearches[st])
-        // }
+        const pastSearches = loadFromStorage(WIKIDB_KEY) || {}
+        if (pastSearches[st]) {
+            console.log('cached')
+            return Promise.resolve(pastSearches[st])
+        }
     
         const apiUrl = `https://en.wikipedia.org/w/api.php?&origin=*&action=query&list=search&srsearch=${st}&format=json`
         console.log('axios')
         return axios.get(apiUrl)
             .then((res) => {
                 const dataItems = res.data.query.search
+                console.log(dataItems)
+                dataItems.splice(5,dataItems.length)
+                console.log(dataItems)
                 const cleanData = dataItems.map((v) => { 
                     return {
                         title: v.title,
-                        snippet: v.snippet
+                        snippet: v.snippet,
+                        pageId: v.pageid
                 }})
     
-                // pastSearches[st] = cleanData
-                // saveToStorage(YTDB_KEY, pastSearches)
+                pastSearches[st] = cleanData
+                saveToStorage(WIKIDB_KEY, pastSearches)
     
                 return cleanData
             })
     
             .catch(err => console.log('err:', err))
         }
-
-
-
-
-    //callYT()
 
     //`https://www.googleapis.com/youtube/v3/search?part=snippet&videoEmbeddable=true&type=video&key=${YT_KEY}&q=${value}`
 

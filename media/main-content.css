@@ -61,3 +61,19 @@ header > * {
     font-size: 1em;
   }
 }
+
+.place-holder-for-vid{
+  margin: 0 0 1em 0;
+}
+
+.content-from-wiki{
+  height: 400px;
+  overflow-y: auto;
+  
+  h6{
+    font-size: 1.2em;
+  }
+  p{
+    font-size: 0.8em;
+  }
+}
