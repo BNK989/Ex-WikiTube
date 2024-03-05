@@ -1,0 +1,9 @@
+:root {
+    --black: hsla(30, 11%, 4%, 1);
+    --main: hsla(199, 27%, 18%, 1);
+    --main-light: hsla(199, 27%, 40%, 1);
+    --main-lighter: hsla(199, 27%, 60%, 1);
+    --white-smoke: hsla(150, 8%, 95%, 1);
+    --beaver: hsla(29, 20%, 58%, 1);
+    --walnut-brown: hsla(33, 20%, 31%, 1);
+}
