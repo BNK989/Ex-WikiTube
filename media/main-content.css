@@ -32,48 +32,53 @@ header > * {
   grid-template-columns: 1fr 1fr;
 }
 
-.result-container{
+.result-container {
   display: flex;
   flex-direction: column;
   gap: 1em;
 
-  article{
+  article {
     padding: 1em;
     display: flex;
     align-items: center;
     max-width: 25em;
     gap: 1em;
     background-color: var(--black);
-    border-radius: .4em;
+    border-radius: 0.4em;
     cursor: pointer;
-    transition: box-shadow .4s;
-
+    transition: box-shadow 0.4s;
   }
 
-  article:hover{
+  article:hover {
     box-shadow: 0 0 14px 1px rgba(255, 255, 255, 0.6);
   }
 
-  img{
+  img {
     width: 160px;
   }
-  h3{
+  h3 {
     font-size: 1em;
   }
 }
 
-.place-holder-for-vid{
+.place-holder-for-vid {
   margin: 0 0 1em 0;
 }
 
-.content-from-wiki{
+.content-from-wiki {
   height: 400px;
   overflow-y: auto;
-  
-  h6{
+
+  h6 {
     font-size: 1.2em;
   }
-  p{
+  p {
     font-size: 0.8em;
   }
+}
+
+.bg-btn {
+  position: absolute;
+  right: 1.4em;
+  bottom: 1em;
 }

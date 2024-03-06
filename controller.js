@@ -85,4 +85,29 @@ window.onload = (event) => {
 
   }
 
+  function onChangeBgColor() {
+    const prm = new Promise(res => {
+      Swal.fire({
+        title: 'Choose a new background color',
+        html: '<input type="color" class="color-input" value="#000000">',
+        showCancelButton: true,
+        confirmButtonText: 'Okay',
+        cancelButtonText: 'Cancel',
+        preConfirm: () => {
+          const colorInput = document.querySelector('.color-input')
+          if (colorInput) {
+            res(colorInput.value)
+          } else {
+            res(null)
+          }
+        },
+      })
+    })
+  
+    prm
+      .then(
+        selctedColor => (document.body.style.backgroundColor = `${selctedColor}`)
+      )
+      .catch(err => console.log(err))
+  }
   

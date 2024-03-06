@@ -51,23 +51,13 @@ function callYT(st){
         return axios.get(apiUrl)
             .then((res) => {
                 const dataItems = res.data.query.search
-                console.log(dataItems)
-                dataItems.splice(5,dataItems.length)
-                console.log(dataItems)
-                const cleanData = dataItems.map((v) => { 
-                    return {
-                        title: v.title,
-                        snippet: v.snippet,
-                        pageId: v.pageid
-                }})
+                const cleanData = cleanWikiData(dataItems)
     
                 pastSearches[st] = cleanData
                 saveToStorage(WIKIDB_KEY, pastSearches)
     
                 return cleanData
             })
-    
-            .catch(err => console.log('err:', err))
         }
 
     //`https://www.googleapis.com/youtube/v3/search?part=snippet&videoEmbeddable=true&type=video&key=${YT_KEY}&q=${value}`
@@ -253,4 +243,16 @@ function callYT(st){
                 }
             }
         ]
+    }
+
+
+    function cleanWikiData(data){
+        data.splice(5,data.length)
+        return data.map((v) => { 
+            return {
+                title: v.title,
+                snippet: v.snippet,
+                pageId: v.pageid
+            }
+        })
     }
